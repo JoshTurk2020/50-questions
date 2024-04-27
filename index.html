@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Goal is 50!</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: linear-gradient(to bottom right, #ff6b6b, #ffa500);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .counter-container {
+      text-align: center;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    #click-count {
+      font-size: 72px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    #click-button {
+      font-size: 24px;
+      padding: 10px 30px;
+      background-color: #ff6b6b;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #click-button:hover {
+      background-color: #ff4d4d;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="counter-container">
+    <div id="click-count">0</div>
+    <button id="click-button">Click me!</button>
+  </div>
+
+  <audio id="click-sound" src="click-sound.mp3"></audio>
+  <audio id="celebration-sound" src="celebration-sound.mp3"></audio>
+
+  <script>
+    const clickCount = document.getElementById('click-count');
+    const clickButton = document.getElementById('click-button');
+    const clickSound = document.getElementById('click-sound');
+    const celebrationSound = document.getElementById('celebration-sound');
+
+    let count = 0;
+
+    clickButton.addEventListener('click', () => {
+      count++;
+      clickCount.textContent = count;
+      clickSound.play();
+
+      if (count === 50) {
+        celebrationSound.play();
+        alert('Congratulations! You reached the goal of 50 clicks!');
+      }
+    });
+  </script>
+</body>
+</html>
