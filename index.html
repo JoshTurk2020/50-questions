@@ -51,8 +51,8 @@
     <button id="click-button">Click me!</button>
   </div>
 
-  <audio id="click-sound" src="click-sound.mp3"></audio>
-  <audio id="celebration-sound" src="celebration-sound.mp3"></audio>
+  <audio id="click-sound" src="luigisound.mp3"></audio>
+  <audio id="celebration-sound" src="marios_victory.mp3"></audio>
 
   <script>
     const clickCount = document.getElementById('click-count');
@@ -69,7 +69,7 @@
 
       if (count === 50) {
         celebrationSound.play();
-        alert('Congratulations! You reached the goal of 50 clicks!');
+        alert('Congratulations! You reached 50 clicks!');
       }
     });
   </script>
