@@ -9,13 +9,30 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-image: url('https://cdn.prod.website-files.com/63e305d9e4c8a10564270580/65e022244bc289ade7377cd6_contextual%20ai.webp');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
       font-family: 'Montserrat', sans-serif;
       color: #333;
       overflow: hidden; /* Prevent scrollbars */
+      position: relative; /* Ensure child elements are positioned relative to the body */
+    }
+
+    .background-gif {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGtnaHB4dGtrMnlod214anh2dWRiamszdnl5amR1dXk4amd3cDY4OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lvfEWJrKEBoi7IYRTP/giphy.webp') center center / cover no-repeat;
+      z-index: 0; /* Layer the GIF underneath */
+    }
+
+    .background-logo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://cdn.prod.website-files.com/63e305d9e4c8a10564270580/65e022244bc289ade7377cd6_contextual%20ai.webp') center center / contain no-repeat;
+      z-index: 1; /* Layer the logo above the GIF */
     }
 
     .counter-container {
@@ -24,7 +41,7 @@
       background-color: rgba(255, 255, 255, 0.8);
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-      z-index: 2; /* Ensure it stays above the ball */
+      z-index: 2; /* Ensure it stays above the background */
     }
 
     #click-count {
@@ -61,7 +78,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      z-index: 2; /* Ensure it stays above the ball */
+      z-index: 2; /* Ensure it stays above the background */
     }
 
     .slider-container input[type=range] {
@@ -70,19 +87,13 @@
       width: 8px;
       height: 150px;
     }
-
-    .ball {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background-color: yellow;
-      border-radius: 50%;
-      z-index: 1; /* Ensure it stays behind other elements */
-    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="background-gif"></div>
+  <div class="background-logo"></div>
+
   <div class="counter-container">
     <div id="click-count">0</div>
     <button id="click-button">Click to add chunk!</button>
@@ -91,8 +102,6 @@
   <div class="slider-container">
     <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
   </div>
-
-  <div class="ball" id="ball"></div>
 
   <audio id="click-sound" src="luigisound.mp3"></audio>
   <audio id="celebration-sound" src="marios_victory.mp3"></audio>
@@ -103,7 +112,6 @@
     const clickSound = document.getElementById('click-sound');
     const celebrationSound = document.getElementById('celebration-sound');
     const volumeSlider = document.getElementById('volume-slider');
-    const ball = document.getElementById('ball');
 
     let count = 0;
 
@@ -127,29 +135,6 @@
     // Set initial volume
     clickSound.volume = volumeSlider.value;
     celebrationSound.volume = volumeSlider.value;
-
-    // Bouncing ball logic
-    let x = Math.random() * (window.innerWidth - 50);
-    let y = Math.random() * (window.innerHeight - 50);
-    let dx = 2;
-    let dy = 2;
-
-    function animateBall() {
-      if (x + dx > window.innerWidth - 50 || x + dx < 0) {
-        dx = -dx;
-      }
-      if (y + dy > window.innerHeight - 50 || y + dy < 0) {
-        dy = -dy;
-      }
-      x += dx;
-      y += dy;
-      ball.style.left = x + 'px';
-      ball.style.top = y + 'px';
-
-      requestAnimationFrame(animateBall);
-    }
-
-    animateBall();
   </script>
 </body>
 </html>
